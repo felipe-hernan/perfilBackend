@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/experiencia")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "https://perfilpersonal-52e49.web.app/")
 public class ExperienciaControlador {
     @Autowired
     private ExperienciaServicio experienciaServicio;
