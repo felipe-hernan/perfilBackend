@@ -21,10 +21,26 @@ public class UsuarioControlador {
         return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
 
-    @PutMapping("/actualizar")
-    public ResponseEntity<Usuario> editarUsuario(@RequestBody Usuario usuario){
-        Usuario actualizarUsuario=usuarioServicio.editarUsuario(usuario);
-        return new ResponseEntity<>(actualizarUsuario,HttpStatus.OK);
+    @PutMapping("/actualizar/{idUsuario}")
+    public ResponseEntity<Usuario> editarUsuario(@PathVariable("idUsuario") Long id,
+                                                 @RequestParam ("nombre") String nuevoNombre,
+                                                 @RequestParam("apellido") String nuevoApellido,
+                                                 @RequestParam("titulo") String nuevoTitulo,
+                                                 @RequestParam("profecion") String nuevaProfecion,
+                                                 @RequestParam("origen") String nuevaOrigen,
+                                                 @RequestParam("descripcion") String nuevaDescripcion,
+                                                 @RequestParam("imagen") String nuevaImagen
+                                                    ){
+        Usuario usuarioNuevo = usuarioServicio.buscarUsuario(id);
+        usuarioNuevo.setNombre(nuevoNombre);
+        usuarioNuevo.setApellido(nuevoApellido);
+        usuarioNuevo.setTitulo(nuevoTitulo);
+        usuarioNuevo.setProfecion(nuevaProfecion);
+        usuarioNuevo.setOrigen(nuevaOrigen);
+        usuarioNuevo.setDescripcion(nuevaDescripcion);
+        usuarioNuevo.setImagen(nuevaImagen);
+        usuarioServicio.guardaUsuario(usuarioNuevo);
+        return new ResponseEntity<>(usuarioNuevo,HttpStatus.OK);
     }
 
 }
